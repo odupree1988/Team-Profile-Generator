@@ -1,4 +1,4 @@
-const Employee = require("../src/Employee");
+const Employee = require("../libs/Employee");
 
 test("This test checks for values of employee", () => {
   const employee = new Employee("Owen", 1, "something@mail.com");

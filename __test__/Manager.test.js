@@ -1,4 +1,4 @@
-const Manager = require("../src/Manager");
+const Manager = require("../libs/Manager");
 
 test("This tests to see if office number is a number", () => {
   const manager = new Manager("Owen", 1, "something@mail.com", 1);
