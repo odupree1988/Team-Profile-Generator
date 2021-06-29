@@ -1,8 +1,12 @@
 const fs = require("fs");
 const inquirer = require("inquirer");
-const Manager = require("./libs/Manager");
 const teamHtml = require("./src/team-template");
 const { writeFile } = require("./utils/generate-site");
+const Manager = require("./libs/Manager");
+const Engineer = require("./libs/Engineer");
+const Intern = require("./libs/Intern");
+
+exports.array = employeeArr = [];
 
 const promptUser = () => {
   return inquirer
@@ -23,13 +27,15 @@ const promptUser = () => {
           if (addMember) {
             return true;
           }
+          const html = teamHtml();
+          writeFile(html);
           return false;
         },
       },
     ])
     .then(({ team }) => {
       if (team === "Manager") {
-        promptManager();
+        return promptManager(team);
       } else if (team === "Engineer") {
         return promptEngineer();
       } else if (team === "Intern") {
@@ -38,15 +44,16 @@ const promptUser = () => {
     });
 };
 
-const promptManager = (managerInput) => {
+const promptManager = () => {
   return inquirer
     .prompt([
       {
         type: "input",
-        name: "manager",
+        name: "managerName",
         message: "Please enter the manager's name.(Required)",
-        validate: (managerInput) => {
-          if (managerInput) {
+        // when: ({ addManager })
+        validate: (nameInput) => {
+          if (nameInput) {
             return true;
           }
           return "Please enter a name!";
@@ -91,12 +98,21 @@ const promptManager = (managerInput) => {
         },
       },
     ])
-    .then(() => {
+    .then((managerData) => {
+      let manager = new Manager(
+        managerData.managerName,
+        managerData.managerId,
+        managerData.managerEmail,
+        managerData.managerOffice
+      );
+      console.log(manager);
+      employeeArr.push(manager);
+      console.log(employeeArr);
       return promptUser();
     });
 };
 
-const promptEngineer = (engineerInput) => {
+const promptEngineer = () => {
   return inquirer
     .prompt([
       {
@@ -147,12 +163,20 @@ const promptEngineer = (engineerInput) => {
         },
       },
     ])
-    .then(() => {
+    .then((engineerData) => {
+      let engineer = new Engineer(
+        engineerData.engineerName,
+        engineerData.engineerId,
+        engineerData.engineerEmail,
+        engineerData.engineerGithub
+      );
+      employeeArr.push(engineer);
+      console.log(employeeArr);
       return promptUser();
     });
 };
 
-const promptIntern = (internInput) => {
+const promptIntern = () => {
   return inquirer
     .prompt([
       {
@@ -203,22 +227,17 @@ const promptIntern = (internInput) => {
         },
       },
     ])
-    .then(() => {
+    .then((internData) => {
+      let intern = new Intern(
+        internData.internName,
+        internData.internId,
+        internData.internEmail,
+        internData.internSchool
+      );
+      employeeArr.push(intern);
+      console.log(employeeArr);
       return promptUser();
     });
 };
 
 promptUser();
-
-//This is the promise chain for passing data to the modules
-
-// .then(managerInput)
-//     .then((managerAnswers) => {
-//       return teamHtml(managerAnswers);
-//     })
-//     .then((readMeMarkDown) => {
-//       return writeFile(readMeMarkDown);
-//     })
-//     .then((writeFileResonse) => {
-//       console.log(writeFileResonse.message);
-//     })
