@@ -5,6 +5,7 @@ const { writeFile } = require("./utils/generate-site");
 const Manager = require("./libs/Manager");
 const Engineer = require("./libs/Engineer");
 const Intern = require("./libs/Intern");
+const { resolve } = require("path");
 
 exports.array = employeeArr = [];
 
@@ -28,7 +29,9 @@ const promptUser = () => {
             return true;
           }
           const html = teamHtml();
-          writeFile(html);
+          writeFile(html).then((response) => {
+            console.log(response.message);
+          });
           return false;
         },
       },
