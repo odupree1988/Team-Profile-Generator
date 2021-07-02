@@ -23,7 +23,7 @@ const managerCard = (data) => {
     <div class="card shadow-lg p-3 mb-5 bg-body rounded" style="width: 18rem;">
       <div class="card-header fw-bold bg-primary text-light">
         ${data.name}
-        <i class="fas fa-mug-hot"></i><p class="fw-normal text">Manager </p>
+        <p class="fw-normal text"><i class="fas fa-mug-hot"></i> Manager </p>
       </div>
       <ul class="list-group list-group-flush">
         <li class="list-group-item">ID: ${data.id}</li>
@@ -41,7 +41,7 @@ const engineerCard = (data) => {
     <div class="card shadow-lg p-3 mb-5 bg-body rounded" style="width: 18rem;">
       <div class="card-header fw-bold bg-primary text-light">
         ${data.name}
-        <i class="fas fa-glasses"></i><p class="fw-normal text">Engineer </p>
+        <p class="fw-normal text"><i class="fas fa-glasses"></i> Engineer </p>
       </div>
       <ul class="list-group list-group-flush">
         <li class="list-group-item">ID: ${data.id}</li>
@@ -59,7 +59,7 @@ const internCard = (data) => {
     <div class="card shadow-lg p-3 mb-5 bg-body rounded" style="width: 18rem;">
       <div class="card-header fw-bold bg-primary text-light">
         ${data.name}
-        <i class="fas fa-user-graduate"></i><p class="fw-normal text">Intern </p>
+        <p class="fw-normal text"><i class="fas fa-user-graduate"></i> Intern </p>
       </div>
       <ul class="list-group list-group-flush">
         <li class="list-group-item">ID: ${data.id}</li>
