@@ -19,7 +19,7 @@ const employeeCard = () => {
 
 const managerCard = (data) => {
   return `
-  <div class="col-sm-6 col-md-6 col-lg-4 ml-lg-auto d-flex justify-content-center">
+  <div class="col d-flex justify-content-center">
     <div class="card shadow-lg p-3 mb-5 bg-body rounded" style="width: 18rem;">
       <div class="card-header fw-bold bg-primary text-light">
         ${data.name}
@@ -37,7 +37,7 @@ const managerCard = (data) => {
 
 const engineerCard = (data) => {
   return `
-  <div class="col-sm-6 col-md-6 col-lg-4 ml-lg-auto d-flex justify-content-center">
+  <div class="col d-flex justify-content-center">
     <div class="card shadow-lg p-3 mb-5 bg-body rounded" style="width: 18rem;">
       <div class="card-header fw-bold bg-primary text-light">
         ${data.name}
@@ -55,7 +55,7 @@ const engineerCard = (data) => {
 
 const internCard = (data) => {
   return `
-  <div class="col-sm-6 col-md-6 col-lg-4 ml-lg-auto d-flex justify-content-center">
+  <div class="col d-flex justify-content-center">
     <div class="card shadow-lg p-3 mb-5 bg-body rounded" style="width: 18rem;">
       <div class="card-header fw-bold bg-primary text-light">
         ${data.name}

@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/odupree1988/Team-Profile-Generator#readme",
   "devDependencies": {
-    "jest": "^27.0.5"
+    "jest": "^27.0.6"
   },
   "dependencies": {
     "inquirer": "^8.1.1"

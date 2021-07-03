@@ -1,51 +1,12 @@
 const fs = require("fs");
 const inquirer = require("inquirer");
 const teamHtml = require("./src/team-template");
-const { writeFile } = require("./utils/generate-site");
 const Manager = require("./libs/Manager");
 const Engineer = require("./libs/Engineer");
 const Intern = require("./libs/Intern");
-const { resolve } = require("path");
+const { writeFile } = require("./utils/generate-site");
 
 exports.array = employeeArr = [];
-
-const promptUser = () => {
-  return inquirer
-    .prompt([
-      {
-        type: "confirm",
-        name: "addMember",
-        message: "Would you like to add a new employee?",
-        default: true,
-      },
-      {
-        type: "list",
-        name: "team",
-        message:
-          "Please select which type of employee you would like to add. (Required)",
-        choices: ["Manager", "Engineer", "Intern"],
-        when: ({ addMember }) => {
-          if (addMember) {
-            return true;
-          }
-          const html = teamHtml();
-          writeFile(html).then((response) => {
-            console.log(response.message);
-          });
-          return false;
-        },
-      },
-    ])
-    .then(({ team }) => {
-      if (team === "Manager") {
-        return promptManager(team);
-      } else if (team === "Engineer") {
-        return promptEngineer();
-      } else if (team === "Intern") {
-        return promptIntern();
-      }
-    });
-};
 
 const promptManager = () => {
   return inquirer
@@ -108,10 +69,44 @@ const promptManager = () => {
         managerData.managerEmail,
         managerData.managerOffice
       );
-      console.log(manager);
       employeeArr.push(manager);
-      console.log(employeeArr);
       return promptUser();
+    });
+};
+
+const promptUser = () => {
+  return inquirer
+    .prompt([
+      {
+        type: "confirm",
+        name: "addMember",
+        message: "Would you like to add another employee?",
+        default: true,
+      },
+      {
+        type: "list",
+        name: "team",
+        message:
+          "Please select which type of employee you would like to add. (Required)",
+        choices: ["Engineer", "Intern"],
+        when: ({ addMember }) => {
+          if (addMember) {
+            return true;
+          }
+          const html = teamHtml();
+          writeFile(html).then((response) => {
+            console.log(response.message);
+          });
+          return false;
+        },
+      },
+    ])
+    .then(({ team }) => {
+      if (team === "Engineer") {
+        return promptEngineer();
+      } else if (team === "Intern") {
+        return promptIntern();
+      }
     });
 };
 
@@ -174,7 +169,6 @@ const promptEngineer = () => {
         engineerData.engineerGithub
       );
       employeeArr.push(engineer);
-      console.log(employeeArr);
       return promptUser();
     });
 };
@@ -238,9 +232,8 @@ const promptIntern = () => {
         internData.internSchool
       );
       employeeArr.push(intern);
-      console.log(employeeArr);
       return promptUser();
     });
 };
 
-promptUser();
+promptManager();
